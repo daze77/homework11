@@ -2,11 +2,13 @@ const express = require('express');
 const app = express();
 const fs = require('fs')
 
+
 const PORT = process.env.PORT || 3000
-const saveFile = './db.json'
+const saveFile = 'Develop/db/db.json'
 
 // will share any static html files with the browser
 app.use( express.static('Develop/public') );
+app.use( express.static('Develop/public/assets/js') );
 
 // accept incoming POST requests
 app.use(express.urlencoded({ extended: true }));
@@ -20,16 +22,38 @@ let db = fs.existsSync(saveFile)?
 
 
 
-
+// Routes (Endpoints)==================================================
 
 app.get('/api/notes', function (req, res) {
-console.log('[these are the notes] ', db);
-res.send(db)
-
-// const newNotes = req.body;
-// res.send ({message: `Here we go: ${newNotes.note-title} ${newNotes.note-textarea} ${newNotes.save-note} ${newNotes.new-note} ${newNotes.list-container}`})
+console.log('[these are all the notes saved] ', db);
+res.send (db)
 
 });
+
+
+app.post('/api/notes', function (req, res){
+    console.log(`I just clicked the save button?`, req.body)
+    const newNotes = req.body;
+    res.send ({message: `New Notes *${newNotes.title}*`})
+ 
+  
+    db.push( newNotes)
+    //save to file
+    fs.writeFileSync(saveFile, JSON.stringify(db))
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
