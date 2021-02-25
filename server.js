@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const fs = require('fs')
+const { v4: uuidv4 } = require('uuid') 
 
 
 const PORT = process.env.PORT || 3000
@@ -18,9 +19,7 @@ app.use(express.json());
 let db = fs.existsSync(saveFile)?
     JSON.parse(fs.readFileSync(saveFile)) :[]
 
-
-
-
+let newNote = []
 
 // Routes (Endpoints)==================================================
 
@@ -30,15 +29,34 @@ res.send (db)
 
 });
 
+// // trying to get ID ============= see if this working
+// app.get('/api/notes/:id', function (req, res){
+//     const id = req.params.id
 
-app.post('/api/notes', function (req, res){
+
+//     const data = db.id
+//     console.log("Sending:", data)
+//     res.send(data)
+//     // const id = req.params.newNote.id;
+//     // const noteclicked = db.id
+//     // handleNoteView(noteclicked)
+
+// })
+
+
+
+app.post('/api/notes', function (req, res){ 
+    const newNote = req.body;
+    newNote.id = uuidv4()
+
     console.log(`I just clicked the save button?`, req.body)
-    const newNotes = req.body;
-    res.send ({message: `New Notes *${newNotes.title}*`})
+    
+    res.send ({message: `New Notes *${newNote.title}, ${newNote.id}*`})
  
-  
-    db.push( newNotes)
-    //save to file
+    // update the database (db) array
+    db.push( newNote)
+    
+    //save updated db to file
     fs.writeFileSync(saveFile, JSON.stringify(db))
 
 })
@@ -48,16 +66,7 @@ app.post('/api/notes', function (req, res){
 
 
 
-
-
-
-
-
-
-
-
-
 // Listener ==================================================
 app.listen(PORT, function() {
-    console.log('We are live on PORT ' + PORT);
+    console.log(`We are live on: http://localhost:${PORT}`);
 });
