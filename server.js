@@ -36,6 +36,7 @@ app.delete(`/api/notes/:id`, function (req, res){
    
     const noteid = req.params.id
     console.log("found:", noteid)
+    // this will filter out the one id where the delete button was clicked and the new db will not include that - therefore delted
     db =db.filter(note=>note.id!=noteid)
     res.end()
    
