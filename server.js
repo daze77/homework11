@@ -24,24 +24,23 @@ let newNote = []
 // Routes (Endpoints)==================================================
 
 app.get('/api/notes', function (req, res) {
-console.log('[these are all the notes saved] ', db);
-res.send (db)
+    console.log('[these are all the notes saved] ', db);
+    res.send (db)
 
 });
 
+
+
 // // trying to get ID ============= see if this working
-// app.get('/api/notes/:id', function (req, res){
-//     const id = req.params.id
+app.delete(`/api/notes/:id`, function (req, res){
+   
+    const noteid = req.params.id
+    console.log("found:", noteid)
+    db =db.filter(note=>note.id!=noteid)
+    res.end()
+   
 
-
-//     const data = db.id
-//     console.log("Sending:", data)
-//     res.send(data)
-//     // const id = req.params.newNote.id;
-//     // const noteclicked = db.id
-//     // handleNoteView(noteclicked)
-
-// })
+})
 
 
 
