@@ -13,6 +13,7 @@
   - [Contributing](#contributing)
   - [Tests Code](#tests-code)
   - [Pictures](#pictures)
+  - [Access to Functional Applicaton](#access-to-functional-applicaton)
   - [Questions](#questions)
     
 ## Description
@@ -46,6 +47,10 @@ Please find screenshots and a brief video showcasing the application below
 ![NoteTaker Pic](Assets/../Develop/Assets/noteTakerRecallSavedNote.png)
 
 ![NoteTaker Pic](Assets/../Develop/Assets/noteTakerDeletedNote2.png)
+
+## Access to Functional Applicaton
+
+A functioning version of the application can be found here [Heroku](https://bthnotetaker.herokuapp.com/notes.html)
 
 ## Questions
     
