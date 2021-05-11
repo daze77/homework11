@@ -43,6 +43,15 @@ const saveNote = (note) =>
     body: JSON.stringify(note),
   });
 
+  const updatedNote = (note) =>
+  fetch(`/api/notes/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(note),
+  }) ;
+
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
@@ -97,7 +106,7 @@ const handleNoteDelete = (e) => {
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
   e.preventDefault();
-  activeNote = JSON.parse(e.target.parentElement.getAttribute("data-note"));
+  activeNote = JSON.parse(e.target.getAttribute("data-note"));
   renderActiveNote();
 };
 
@@ -118,6 +127,7 @@ const handleRenderSaveBtn = () => {
 // Render the list of note titles
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
+  console.log(`these are all the saved notes in the db`,jsonNotes)
   if (window.location.pathname === '/notes.html') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
@@ -128,10 +138,11 @@ const renderNoteList = async (notes) => {
   const createLi = (text, delBtn = true) => {
     const liEl = document.createElement('li');
     liEl.classList.add('list-group-item');
+    liEl.addEventListener('click', handleNoteView);
+
 
     const spanEl = document.createElement('span');
     spanEl.innerText = text;
-    spanEl.addEventListener('click', handleNoteView);
 
     liEl.append(spanEl);
 

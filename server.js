@@ -24,7 +24,7 @@ let newNote = []
 // Routes (Endpoints)==================================================
 
 app.get('/api/notes', function (req, res) {
-    console.log('[these are all the notes saved] ', db);
+    // console.log('[these are all the notes saved] ', db);
     res.send (db)
 
 });
@@ -39,11 +39,8 @@ app.delete(`/api/notes/:id`, function (req, res){
     // this will filter out the one id where the delete button was clicked and the new db will not include that - therefore delted
     db =db.filter(note=>note.id!=noteid)
     res.end()
-   
 
 })
-
-
 
 app.post('/api/notes', function (req, res){ 
     const newNote = req.body;
@@ -58,11 +55,28 @@ app.post('/api/notes', function (req, res){
     
     //save updated db to file
     fs.writeFileSync(saveFile, JSON.stringify(db))
-
 })
 
 
+app.put(`/api/notes/:id`, function (req, res){ 
+    const updatedNote = req.body;
+    note.id = req.params.id
 
+    // console.log(`I just clicked the save button?`, req.body)
+        console.log(`this is the updateNote`, updatedNote)
+
+    res.send ({message: `UPdated Notes *${updatedNote.title}, ${updatedNote.id}*`})
+
+ 
+    // update the database (db) array
+    dbObjectIndex=db.filter(note=>note.id)
+    console.log(dbObjectIndex)
+    // db.push( newNote)
+    
+    //save updated db to file
+    fs.writeFileSync(saveFile, JSON.stringify(db))
+
+})
 
 
 
