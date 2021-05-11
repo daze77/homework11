@@ -61,6 +61,7 @@ const deleteNote = (id) =>
   });
 
 const renderActiveNote = () => {
+  console.log(`activenote under rederActive Note`, activeNote)
   hide(saveNoteBtn);
 
   if (activeNote.id) {
@@ -81,9 +82,14 @@ const handleNoteSave = () => {
       text: noteText.value,
       id: activeNote.id
     }
-    console.log(`this is the updated note`, updatedNote)
+    console.log(`this is the saved note`, updatedNote)
     updateNote(updatedNote).then(() => {
-      activeNote = {}
+      activeNote = {
+        title: updatedNote.title,
+        text: updatedNote.text,
+        id: updatedNote.id
+      }
+      console.log(`this is the activeNote`, activeNote)
       getAndRenderNotes();
       renderActiveNote();
     });
