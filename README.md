@@ -38,15 +38,15 @@
 ## Pictures
 
 Please find screenshots and a brief video showcasing the application below
-![NoteTaker Pic](Assets/../Develop/Assets/noteTakerHome.png)
+![NoteTaker Pic](Develop/Assets/images/noteTakerHome.png)
 
-![NoteTaker Pic](Assets/../Develop/Assets/noteTakerMain.png)
+![NoteTaker Pic](Develop/Assets/images/noteTakerMain.png)
 
-![NoteTaker Pic](AAssets/../Develop/Assets/noteTakerSaveButton.png)
+![NoteTaker Pic](Develop/Assets/images/noteTakerSaveButton.png)
 
-![NoteTaker Pic](Assets/../Develop/Assets/noteTakerRecallSavedNote.png)
+![NoteTaker Pic](Develop/Assets/images/noteTakerRecallSavedNote.png)
 
-![NoteTaker Pic](Assets/../Develop/Assets/noteTakerDeletedNote2.png)
+![NoteTaker Pic](Develop/Assets/images/noteTakerDeletedNote2.png)
 
 ## Access to Functional Applicaton
 
