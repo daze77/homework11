@@ -73,10 +73,9 @@ const renderActiveNote = () => {
   }
 };
 
-const handleNoteSave = (id) => {
+const handleNoteSave = () => {
 
   if (activeNote.id){
-    console.log(`this is an existing note`)
     const updatedNote = {
       title: noteTitle.value,
       text: noteText.value,
@@ -84,6 +83,7 @@ const handleNoteSave = (id) => {
     }
     console.log(`this is the updated note`, updatedNote)
     updateNote(updatedNote).then(() => {
+      activeNote = {}
       getAndRenderNotes();
       renderActiveNote();
     });
@@ -159,10 +159,6 @@ const renderNoteList = async (notes) => {
     liEl.innerText=text;
 
 
-    // const spanEl = document.createElement('span');
-    // spanEl.innerText = text;
-
-    // liEl.append(spanEl);
 
     if (delBtn) {
       const delBtnEl = document.createElement('i');
