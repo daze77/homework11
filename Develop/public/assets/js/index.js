@@ -43,7 +43,7 @@ const saveNote = (note) =>
     body: JSON.stringify(note),
   });
 
-  const updatedNote = (note) =>
+  const updateNote = (note, id) =>
   fetch(`/api/notes/${id}`, {
     method: 'PUT',
     headers: {
@@ -73,7 +73,22 @@ const renderActiveNote = () => {
   }
 };
 
-const handleNoteSave = () => {
+const handleNoteSave = (id) => {
+
+  if (activeNote.id){
+    console.log(`this is an existing note`)
+    const updatedNote = {
+      title: noteTitle.value,
+      text: noteText.value,
+      id: activeNote.id
+    }
+    console.log(`this is the updated note`, updatedNote)
+    updateNote(updatedNote).then(() => {
+      getAndRenderNotes();
+      renderActiveNote();
+    });
+
+  } else {
   const newNote = {
     title: noteTitle.value,
     text: noteText.value,
@@ -83,6 +98,7 @@ const handleNoteSave = () => {
     getAndRenderNotes();
     renderActiveNote();
   });
+  }
 };
 
 // Delete the clicked note
@@ -108,6 +124,7 @@ const handleNoteView = (e) => {
   e.preventDefault();
   activeNote = JSON.parse(e.target.getAttribute("data-note"));
   renderActiveNote();
+  console.log(`this is the active note`, activeNote)
 };
 
 // Sets the activeNote to and empty object and allows the user to enter a new note
@@ -139,12 +156,13 @@ const renderNoteList = async (notes) => {
     const liEl = document.createElement('li');
     liEl.classList.add('list-group-item');
     liEl.addEventListener('click', handleNoteView);
+    liEl.innerText=text;
 
 
-    const spanEl = document.createElement('span');
-    spanEl.innerText = text;
+    // const spanEl = document.createElement('span');
+    // spanEl.innerText = text;
 
-    liEl.append(spanEl);
+    // liEl.append(spanEl);
 
     if (delBtn) {
       const delBtnEl = document.createElement('i');

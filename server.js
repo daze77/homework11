@@ -60,7 +60,10 @@ app.post('/api/notes', function (req, res){
 
 app.put(`/api/notes/:id`, function (req, res){ 
     const updatedNote = req.body;
-    note.id = req.params.id
+    console.log(`this is the updated note on the server side`, updatedNote)
+    // note.id = req.params.id
+
+    // console.log('found existing note:', noteid)
 
     // console.log(`I just clicked the save button?`, req.body)
         console.log(`this is the updateNote`, updatedNote)
@@ -69,9 +72,13 @@ app.put(`/api/notes/:id`, function (req, res){
 
  
     // update the database (db) array
-    dbObjectIndex=db.filter(note=>note.id)
-    console.log(dbObjectIndex)
-    // db.push( newNote)
+    dbObjectIndex=db.find(({id}) => id === updatedNote.id)
+    console.log(`this is the db object server side`, dbObjectIndex)
+    dbObjectIndex.title = updatedNote.title
+    dbObjectIndex.text = updatedNote.text
+
+    console.log(`updated objectIndex`, dbObjectIndex)
+   
     
     //save updated db to file
     fs.writeFileSync(saveFile, JSON.stringify(db))
